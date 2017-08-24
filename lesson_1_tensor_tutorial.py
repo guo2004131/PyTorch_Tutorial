@@ -119,8 +119,8 @@ print(b)
 # Converting numpy Array to torch Tensor
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # See how changing the np array changed the torch Tensor automatically
-
 import numpy as np
+
 a = np.ones(5)
 b = torch.from_numpy(a)
 np.add(a, 1, out=a)
@@ -140,4 +140,5 @@ print(b)
 if torch.cuda.is_available():
     x = x.cuda()
     y = y.cuda()
-    x + y
+    z = x + y
+    print (z)
