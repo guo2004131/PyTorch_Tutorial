@@ -102,11 +102,14 @@ x = torch.randn(3)
 x = Variable(x, requires_grad=True)
 
 y = x * 2
+count = 0
 while y.data.norm() < 1000:
     y = y * 2
+    count += 1
 
 print(y)
-
+print (count)
+print(y.data.norm())
 ###############################################################
 #
 gradients = torch.FloatTensor([0.1, 1.0, 0.0001])
