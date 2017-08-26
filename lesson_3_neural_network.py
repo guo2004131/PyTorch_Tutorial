@@ -74,7 +74,6 @@ class Net(nn.Module):
             num_features *= s
         return num_features
 
-
 net = Net()
 print(net)
 
@@ -88,7 +87,7 @@ print(net)
 
 params = list(net.parameters())
 print(len(params))
-print(params[0].size())  # conv1's .weight
+print(params[1].size())  # conv1's .weight
 
 ########################################################################
 # The input to the forward is an ``autograd.Variable``, and so is the output.
