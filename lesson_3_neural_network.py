@@ -95,7 +95,7 @@ print(params[1].size())  # conv1's .weight
 input = Variable(torch.randn(1, 1, 32, 32))
 out = net(input)
 print(out)
-
+print(net.num_flat_features(input))
 ########################################################################
 # Zero the gradient buffers of all parameters and backprops with random
 # gradients:
