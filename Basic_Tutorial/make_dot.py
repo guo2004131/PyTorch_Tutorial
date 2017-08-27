@@ -49,5 +49,5 @@ def make_dot(var, params=None):
                 for t in var.saved_tensors:
                     dot.edge(str(id(t)), str(id(var)))
                     add_nodes(t)
-    add_nodes(var.grad_fn)
+    add_nodes(var.creator)
     return dot
