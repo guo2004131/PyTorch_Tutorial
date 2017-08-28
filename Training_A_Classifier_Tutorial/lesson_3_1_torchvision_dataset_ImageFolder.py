@@ -22,8 +22,8 @@ data_transforms = {
 data_dir = 'hymenoptera_data'
 # "dsets" is dictionary type. Each "x" in ['train', 'val'] are listed as keys in the dictionary
 # Note that the data_transform is also a dict type variable.
-
 dsets = {x: datasets.ImageFolder(os.path.join(data_dir, x), data_transforms[x]) for x in ['train', 'val']}
+
 # "dset_loaders" uses "torch.utils.data.Dataloader" function, which sets the batch_size.
 # "dset_loaders" is used to feed the neural network.
 # Note that the loader here only processed "file names" not loading it into the CPU memory/GPU memory
