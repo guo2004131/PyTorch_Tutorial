@@ -164,6 +164,8 @@ def train_model(model, criterion, optimizer, lr_scheduler, num_epochs=25):
             # Iterate over data.
             for data in dset_loaders[phase]:
                 # get the inputs
+                # the shape of input is batch_size*image_channels_width_height
+                # "data" consists of two items: data[0] is the image, data[1] is the label.
                 inputs, labels = data
 
                 # wrap them in Variable
@@ -174,6 +176,9 @@ def train_model(model, criterion, optimizer, lr_scheduler, num_epochs=25):
                     inputs, labels = Variable(inputs), Variable(labels)
 
                 # zero the parameter gradients
+                # note that When you perform loss.backward() the gradients are accumulated inplace
+                # in each Variable that requires gradient. That is why you need to
+                # perform optimizer.zero_grad() before each backward.
                 optimizer.zero_grad()
 
                 # forward
@@ -183,7 +188,10 @@ def train_model(model, criterion, optimizer, lr_scheduler, num_epochs=25):
 
                 # backward + optimize only if in training phase
                 if phase == 'train':
+                    # back propagate the loss
                     loss.backward()
+                    # perform a single optimization step (parameter update)
+                    # In this case, the parameters are updated for every batch_size=4 samples.
                     optimizer.step()
 
                 # statistics
@@ -265,9 +273,13 @@ def visualize_model(model, num_images=6):
 #
 # Load a pretrained model and reset final fully connected layer.
 #
-
+# To load a resnet 18 for finetuning. Note that the ft is abbreviated for finetune
 model_ft = models.resnet18(pretrained=True)
+# Note that "fc" is the fully connected layer. "in_features" is input vector shape.
 num_ftrs = model_ft.fc.in_features
+# To uncomment the following line to check the original output vector shape.
+# num_out_ftrs = model_ft.fc.out_features
+# In this example, the output shape is changed to "2" instead of "1000"
 model_ft.fc = nn.Linear(num_ftrs, 2)
 
 if use_gpu:
