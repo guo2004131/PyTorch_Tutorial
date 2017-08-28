@@ -179,6 +179,9 @@ def train_model(model, criterion, optimizer, lr_scheduler, num_epochs=25):
                 # note that When you perform loss.backward() the gradients are accumulated inplace
                 # in each Variable that requires gradient. That is why you need to
                 # perform optimizer.zero_grad() before each backward.
+                #
+                # Also, note that the loss functions average over the batch size.
+                # https://discuss.pytorch.org/t/pytorch-gradients/884/4
                 optimizer.zero_grad()
 
                 # forward
