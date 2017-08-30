@@ -66,7 +66,7 @@ plt.ion()  # interactive mode
 
 landmarks_frame = pd.read_csv('faces/face_landmarks.csv')
 
-n = 65
+n = 0
 img_name = landmarks_frame.ix[n, 0]
 landmarks = landmarks_frame.ix[n, 1:].as_matrix().astype('float')
 landmarks = landmarks.reshape(-1, 2)
@@ -102,11 +102,18 @@ plt.show()
 # dataset.
 # Your custom dataset should inherit ``Dataset`` and override the following
 # methods:
+
 #
+# **************THIS IS VERY IMPORTANT**************
+# **************THIS IS VERY IMPORTANT**************
+# **************THIS IS VERY IMPORTANT**************
 # -  ``__len__`` so that ``len(dataset)`` returns the size of the dataset.
 # -  ``__getitem__`` to support the indexing such that ``dataset[i]`` can
 #    be used to get :math:`i`\ th sample
-#
+# **************THIS IS VERY IMPORTANT**************
+# **************THIS IS VERY IMPORTANT**************
+# **************THIS IS VERY IMPORTANT**************
+
 # Let's create a dataset class for our face landmarks dataset. We will
 # read the csv in ``__init__`` but leave the reading of images to
 # ``__getitem__``. This is memory efficient because all the images are not
@@ -170,7 +177,7 @@ for i in range(len(face_dataset)):
     ax.set_title('Sample #{}'.format(i))
     ax.axis('off')
     show_landmarks(**sample)
-
+    # only show 4 consecutive images listed in the "face_landmarks.csv" file
     if i == 3:
         plt.show()
         break
